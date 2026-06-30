@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MINECRAFT • Web Edition</title>
+    <title>MINECRAFT • Web Edition v2.0</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
         
@@ -33,7 +33,7 @@
         .mc-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 10px;
+            padding: 8px;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -42,33 +42,35 @@
         .mc-header {
             background: linear-gradient(#3f3f3f, #2a2a2a);
             border: 4px solid #1f1f1f;
-            padding: 12px 20px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             box-shadow: 0 4px 0 #000;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
         .mc-logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             color: #5d8c3e;
             text-shadow: 
                 3px 3px 0 #000,
                 -1px -1px 0 #000;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
         
         .player-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
         .skin-avatar {
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             border: 4px solid #3f3f3f;
             background: #2a2a2a;
             image-rendering: pixelated;
@@ -79,15 +81,9 @@
             text-align: center;
         }
         
-        .level-text {
-            font-size: 14px;
-            color: #ffd700;
-            text-shadow: 1px 1px 0 #000;
-        }
-        
         .xp-bar {
-            width: 160px;
-            height: 14px;
+            width: 140px;
+            height: 12px;
             background: #3f3f3f;
             border: 3px solid #1f1f1f;
             position: relative;
@@ -103,7 +99,7 @@
         .main-content {
             flex: 1;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             min-height: 0;
         }
         
@@ -121,66 +117,73 @@
             box-shadow: 0 0 0 4px #1f1f1f;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         #world-canvas {
             display: block;
-            width: 100%;
-            height: 100%;
-            cursor: crosshair;
+            image-rendering: pixelated;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            max-width: 100%;
+            max-height: 100%;
         }
         
         .sidebar {
-            width: 280px;
+            width: 260px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
         
         .minimap-container {
             background: #1f1f1f;
             border: 4px solid #3f3f3f;
-            padding: 8px;
+            padding: 6px;
+            cursor: pointer;
         }
         
         .minimap-title {
-            font-size: 11px;
+            font-size: 10px;
             color: #ffd700;
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         
         #minimap {
             display: block;
             width: 100%;
             border: 3px solid #000;
+            image-rendering: pixelated;
         }
         
         .stats-panel {
             background: #1f1f1f;
             border: 4px solid #3f3f3f;
-            padding: 12px;
+            padding: 10px;
         }
         
         .stats-title {
-            font-size: 12px;
+            font-size: 11px;
             color: #5d8c3e;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-align: center;
         }
         
         .hotbar {
             display: flex;
-            gap: 4px;
+            gap: 3px;
             background: #1f1f1f;
             border: 4px solid #3f3f3f;
-            padding: 6px;
+            padding: 5px;
             justify-content: center;
+            flex-wrap: wrap;
         }
         
         .hotbar-slot {
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             background: #3f3f3f;
             border: 3px solid #1f1f1f;
             display: flex;
@@ -190,6 +193,7 @@
             position: relative;
             cursor: pointer;
             transition: all 0.1s;
+            flex-shrink: 0;
         }
         
         .hotbar-slot:hover {
@@ -198,19 +202,19 @@
         
         .hotbar-slot.selected {
             border-color: #ffd700;
-            box-shadow: 0 0 8px #ffd700;
+            box-shadow: 0 0 10px #ffd700;
         }
         
         .hotbar-slot .item-icon {
-            font-size: 22px;
+            font-size: 24px;
             line-height: 1;
         }
         
         .hotbar-slot .item-count {
             position: absolute;
-            bottom: 2px;
-            right: 4px;
-            font-size: 10px;
+            bottom: 1px;
+            right: 3px;
+            font-size: 9px;
             color: #fff;
             text-shadow: 1px 1px 0 #000;
         }
@@ -218,8 +222,8 @@
         .controls {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 6px;
         }
         
         .mc-btn {
@@ -228,14 +232,15 @@
             border: 4px solid #3f3f3f;
             border-bottom: 5px solid #2a2a2a;
             border-right: 5px solid #2a2a2a;
-            padding: 10px 16px;
+            padding: 9px 12px;
             font-family: 'Press Start 2P', monospace;
-            font-size: 11px;
+            font-size: 10px;
             cursor: pointer;
             text-shadow: 2px 2px 0 #000;
             flex: 1;
-            min-width: 120px;
+            min-width: 105px;
             transition: all 0.1s;
+            white-space: nowrap;
         }
         
         .mc-btn:active {
@@ -252,11 +257,18 @@
             background: #8b3a3a;
         }
         
+        .mc-btn.small {
+            padding: 6px 10px;
+            font-size: 9px;
+            min-width: 70px;
+        }
+        
         .info-text {
-            font-size: 10px;
+            font-size: 9px;
             color: #888;
             text-align: center;
-            margin-top: 8px;
+            margin-top: 6px;
+            line-height: 1.3;
         }
         
         /* Crafting Modal */
@@ -267,60 +279,65 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.88);
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            padding: 10px;
         }
         
         .modal-content {
             background: #2a2a2a;
             border: 6px solid #3f3f3f;
-            width: 90%;
+            width: 100%;
             max-width: 820px;
-            padding: 20px;
+            padding: 16px;
             box-shadow: 0 0 0 8px #1f1f1f;
+            max-height: 92vh;
+            overflow-y: auto;
         }
         
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         
         .modal-title {
-            font-size: 20px;
+            font-size: 18px;
             color: #5d8c3e;
         }
         
         .crafting-area {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
         }
         
         .inventory-list {
             flex: 1;
-            min-width: 200px;
+            min-width: 180px;
+            max-height: 280px;
+            overflow-y: auto;
         }
         
         .inventory-list h4 {
             color: #ffd700;
-            font-size: 12px;
-            margin-bottom: 8px;
+            font-size: 11px;
+            margin-bottom: 6px;
         }
         
         .inv-item {
             background: #3f3f3f;
             border: 3px solid #1f1f1f;
-            padding: 8px 12px;
-            margin-bottom: 6px;
+            padding: 7px 10px;
+            margin-bottom: 5px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 12px;
         }
         
         .inv-item:hover {
@@ -330,35 +347,35 @@
         .inv-item .item-name {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         
         .crafting-grid-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         
         .crafting-grid {
             display: grid;
-            grid-template-columns: repeat(3, 58px);
-            grid-template-rows: repeat(3, 58px);
-            gap: 4px;
+            grid-template-columns: repeat(3, 52px);
+            grid-template-rows: repeat(3, 52px);
+            gap: 3px;
             background: #1f1f1f;
-            padding: 8px;
+            padding: 6px;
             border: 4px solid #3f3f3f;
         }
         
         .craft-slot {
-            width: 58px;
-            height: 58px;
+            width: 52px;
+            height: 52px;
             background: #3f3f3f;
             border: 3px solid #1f1f1f;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             position: relative;
         }
@@ -368,14 +385,14 @@
         }
         
         .output-slot {
-            width: 70px;
-            height: 70px;
+            width: 64px;
+            height: 64px;
             background: #3f3f3f;
             border: 4px solid #ffd700;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
             box-shadow: 0 0 12px #ffd700;
         }
@@ -386,36 +403,36 @@
         }
         
         .recipe-hint {
-            font-size: 10px;
+            font-size: 9px;
             color: #888;
             text-align: center;
-            max-width: 280px;
+            max-width: 260px;
         }
         
         /* Virtual Joystick */
         #joystick-container {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 120px;
-            height: 120px;
+            bottom: 18px;
+            right: 18px;
+            width: 110px;
+            height: 110px;
             z-index: 500;
             display: none;
         }
         
         #joystick-outer {
-            width: 120px;
-            height: 120px;
-            background: rgba(40, 40, 40, 0.75);
+            width: 110px;
+            height: 110px;
+            background: rgba(40, 40, 40, 0.8);
             border: 5px solid #3f3f3f;
             border-radius: 50%;
             position: relative;
-            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+            box-shadow: 0 0 20px rgba(0,0,0,0.7);
         }
         
         #joystick-knob {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: #5d8c3e;
             border: 4px solid #3f3f3f;
             border-radius: 50%;
@@ -431,6 +448,7 @@
             display: none;
         }
         
+        /* Mobile Optimizations */
         @media (max-width: 900px) {
             .main-content {
                 flex-direction: column;
@@ -440,11 +458,12 @@
                 width: 100%;
                 flex-direction: row;
                 flex-wrap: wrap;
+                gap: 8px;
             }
             
             .minimap-container, .stats-panel {
                 flex: 1;
-                min-width: 160px;
+                min-width: 150px;
             }
             
             #joystick-container {
@@ -452,14 +471,71 @@
             }
             
             .mc-header {
-                flex-wrap: wrap;
-                gap: 10px;
+                padding: 8px 12px;
             }
             
             .player-info {
                 order: 2;
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .hotbar-slot {
+                width: 54px;
+                height: 54px;
+            }
+            
+            .hotbar-slot .item-icon {
+                font-size: 26px;
+            }
+            
+            .mc-btn {
+                font-size: 9px;
+                padding: 8px 10px;
+                min-width: 90px;
+            }
+            
+            .world-canvas-container {
+                max-height: 58vh;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .mc-container {
+                padding: 5px;
+            }
+            
+            .sidebar {
+                flex-direction: column;
+            }
+            
+            .minimap-container {
+                max-width: 100%;
+            }
+            
+            #minimap {
+                max-width: 220px;
+                margin: 0 auto;
+                display: block;
+            }
+            
+            .hotbar-slot {
+                width: 58px;
+                height: 58px;
+            }
+            
+            .mc-btn {
+                flex: 1 1 45%;
+                font-size: 9px;
+            }
+            
+            .xp-bar {
+                width: 120px;
+            }
+            
+            .skin-avatar {
+                width: 48px;
+                height: 48px;
             }
         }
         
@@ -473,6 +549,16 @@
         .block-stone { background: #7f7f7f; }
         .block-water { background: #3a6ea5; }
         .block-tree { background: #228b22; }
+        
+        .sound-btn {
+            background: #444;
+            border: 3px solid #3f3f3f;
+            color: #fff;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
     </style>
 </head>
 <body>
@@ -481,32 +567,38 @@
         <div class="mc-header">
             <div>
                 <div class="mc-logo">MINECRAFT</div>
-                <div style="font-size:11px; color:#5d8c3e; margin-top:-4px;">WEB EDITION</div>
+                <div style="font-size:10px; color:#5d8c3e; margin-top:-3px;">WEB EDITION <span style="color:#ffd700;">v2.0</span></div>
             </div>
             
             <div class="player-info">
                 <!-- Steve Skin -->
-                <canvas id="skin-canvas" class="skin-avatar" width="64" height="64"></canvas>
+                <canvas id="skin-canvas" class="skin-avatar" width="56" height="56"></canvas>
                 
                 <div class="level-container">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <span style="color:#ffd700; font-size:13px;">LEVEL</span>
-                        <span id="level-text" style="font-size:22px; color:#fff; text-shadow:2px 2px #000;">12</span>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span style="color:#ffd700; font-size:11px;">LVL</span>
+                        <span id="level-text" style="font-size:20px; color:#fff; text-shadow:2px 2px #000;">12</span>
                     </div>
                     <div class="xp-bar">
                         <div id="xp-fill" class="xp-fill" style="width: 65%;"></div>
                     </div>
-                    <div style="font-size:9px; color:#888; margin-top:2px;">XP: <span id="xp-text">650 / 1200</span></div>
+                    <div style="font-size:8px; color:#888; margin-top:1px;">XP: <span id="xp-text">650 / 1200</span></div>
                 </div>
+            </div>
+            
+            <div style="display:flex; align-items:center; gap:6px;">
+                <button onclick="toggleSound()" class="sound-btn" id="sound-btn">🔊</button>
+                <button onclick="saveGame()" class="mc-btn small green">💾 SAVE</button>
+                <button onclick="loadGame()" class="mc-btn small">📂 LOAD</button>
             </div>
         </div>
 
         <div class="main-content">
             <!-- World -->
             <div class="world-section">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                    <div style="color:#5d8c3e; font-size:13px;">WORLD • SEED: <span id="world-seed">48291</span></div>
-                    <div style="font-size:11px; color:#888;">WASD / Joystick • Click nearby blocks to mine</div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; flex-wrap:wrap; gap:4px;">
+                    <div style="color:#5d8c3e; font-size:11px;">WORLD • SEED: <span id="world-seed">48291</span></div>
+                    <div style="font-size:9px; color:#888;">WASD / Joystick • Tap to mine/place</div>
                 </div>
                 
                 <div class="world-canvas-container">
@@ -521,38 +613,38 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Mini Map -->
-                <div class="minimap-container">
-                    <div class="minimap-title">MINI MAP</div>
+                <div class="minimap-container" id="minimap-container">
+                    <div class="minimap-title">MINI MAP • Click to teleport</div>
                     <canvas id="minimap" width="240" height="240"></canvas>
                 </div>
                 
                 <!-- Stats -->
                 <div class="stats-panel">
                     <div class="stats-title">PLAYER STATUS</div>
-                    <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px;">
+                    <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:5px;">
                         <div>❤️ HEALTH</div>
                         <div style="color:#ff5555;">20 / 20</div>
                     </div>
-                    <div style="display:flex; justify-content:space-between; font-size:12px;">
+                    <div style="display:flex; justify-content:space-between; font-size:11px;">
                         <div>🍖 HUNGER</div>
                         <div style="color:#ffaa00;">18 / 20</div>
                     </div>
                     
-                    <div style="margin-top:12px; font-size:10px; color:#888; text-align:center;">
-                        Position: <span id="player-pos">32, 32</span>
+                    <div style="margin-top:8px; font-size:9px; color:#888; text-align:center;">
+                        Pos: <span id="player-pos">32, 32</span>
                     </div>
                 </div>
                 
                 <!-- Action Buttons -->
                 <div class="controls">
-                    <button onclick="generateNewWorld()" class="mc-btn green">GENERATE NEW WORLD</button>
-                    <button onclick="openCrafting()" class="mc-btn">CRAFTING TABLE</button>
-                    <button onclick="resetPlayer()" class="mc-btn">RESET POSITION</button>
+                    <button onclick="generateNewWorld()" class="mc-btn green">🌍 NEW WORLD</button>
+                    <button onclick="openCrafting()" class="mc-btn">🛠️ CRAFT</button>
+                    <button onclick="resetPlayer()" class="mc-btn">🔄 RESET</button>
                 </div>
                 
                 <div class="info-text">
-                    Collect resources by clicking near your player.<br>
-                    Craft items to gain XP and level up!
+                    Tap near you to mine • Hold placeable item (dirt/stone/plank) to build!<br>
+                    Craft to level up • Click minimap to teleport
                 </div>
             </div>
         </div>
@@ -563,7 +655,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-title">🛠️ CRAFTING TABLE</div>
-                <button onclick="closeCrafting()" class="mc-btn red" style="padding:6px 14px; font-size:12px;">CLOSE</button>
+                <button onclick="closeCrafting()" class="mc-btn red" style="padding:5px 12px; font-size:11px;">CLOSE</button>
             </div>
             
             <div class="crafting-area">
@@ -577,31 +669,31 @@
                 
                 <!-- Crafting Grid + Output -->
                 <div class="crafting-grid-container">
-                    <div style="display:flex; gap:20px; align-items:center;">
+                    <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; justify-content:center;">
                         <!-- 3x3 Grid -->
                         <div>
-                            <div style="font-size:11px; color:#ffd700; margin-bottom:4px; text-align:center;">CRAFTING GRID</div>
+                            <div style="font-size:10px; color:#ffd700; margin-bottom:3px; text-align:center;">CRAFTING GRID</div>
                             <div class="crafting-grid" id="crafting-grid">
                                 <!-- 9 slots populated by JS -->
                             </div>
                         </div>
                         
                         <!-- Arrow + Output -->
-                        <div style="display:flex; flex-direction:column; align-items:center; margin-top:30px;">
-                            <div style="font-size:28px; color:#5d8c3e; margin-bottom:8px;">→</div>
-                            <div style="font-size:11px; color:#ffd700; margin-bottom:4px;">OUTPUT</div>
+                        <div style="display:flex; flex-direction:column; align-items:center; margin-top:20px;">
+                            <div style="font-size:24px; color:#5d8c3e; margin-bottom:6px;">→</div>
+                            <div style="font-size:10px; color:#ffd700; margin-bottom:3px;">OUTPUT</div>
                             <div id="output-slot" class="output-slot" onclick="takeOutput()"></div>
                         </div>
                     </div>
                     
                     <div class="recipe-hint">
-                        Put items in the grid from your inventory.<br>
-                        Common recipes: Log → 4 Planks • 2 Planks → 4 Sticks • 3 Planks + 2 Sticks → Wooden Pickaxe
+                        Log → 4 Planks • 2 Planks → 4 Sticks • 3 Planks + 2 Sticks → Wooden Pickaxe<br>
+                        3 Stone + 2 Sticks → Stone Pickaxe (bonus)
                     </div>
                     
-                    <div style="margin-top:10px; display:flex; gap:10px; justify-content:center;">
-                        <button onclick="clearCraftingGrid()" class="mc-btn" style="padding:8px 18px; font-size:11px;">CLEAR GRID</button>
-                        <button onclick="autoCraftDemo()" class="mc-btn green" style="padding:8px 18px; font-size:11px;">AUTO CRAFT DEMO</button>
+                    <div style="margin-top:8px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+                        <button onclick="clearCraftingGrid()" class="mc-btn small">CLEAR GRID</button>
+                        <button onclick="autoCraftDemo()" class="mc-btn green small">AUTO CRAFT DEMO</button>
                     </div>
                 </div>
             </div>
@@ -619,7 +711,7 @@
         // ==================== GAME STATE ====================
         const WORLD_SIZE = 64;
         let world = [];
-        let player = { x: 32, y: 32, speed: 0.12 };
+        let player = { x: 32, y: 32, speed: 0.13 };
         let level = 12;
         let xp = 650;
         let xpToNext = 1200;
@@ -639,12 +731,21 @@
         let keys = {};
         let isMoving = false;
         
+        // Dynamic view for mobile
+        let CANVAS_SIZE = 720;
+        let VIEW_TILES = 15;
+        let TILE_SIZE = 48;
+        
         // Virtual Joystick
         let joystickActive = false;
         let joyDX = 0, joyDY = 0;
         
-        const TILE_SIZE = 32;
-        const VIEW_TILES = 15;
+        // Particles
+        let particles = [];
+        
+        // Sound
+        let audioCtx = null;
+        let soundEnabled = true;
         
         const TILE_COLORS = {
             0: '#5d8c3e', // grass
@@ -652,7 +753,8 @@
             2: '#7f7f7f', // stone
             3: '#3a6ea5', // water
             4: '#e8d48b', // sand
-            5: '#228b22'  // tree
+            5: '#228b22', // tree
+            6: '#c4a77d'  // wood floor (placed)
         };
         
         const ITEM_ICONS = {
@@ -660,8 +762,10 @@
             plank: '🪚',
             stick: '🥢',
             wooden_pickaxe: '⛏️',
+            stone_pickaxe: '⛏️',
             stone: '🪨',
-            dirt: '🟫'
+            dirt: '🟫',
+            apple: '🍎'
         };
         
         const HOTBAR_ITEMS = ['log', 'plank', 'stick', 'wooden_pickaxe', 'stone', 'dirt'];
@@ -678,7 +782,6 @@
             for (let y = 0; y < WORLD_SIZE; y++) {
                 world[y] = [];
                 for (let x = 0; x < WORLD_SIZE; x++) {
-                    // Multi-octave pseudo noise for nice terrain
                     let nx = x / 12;
                     let ny = y / 12;
                     
@@ -711,6 +814,34 @@
             document.getElementById('world-seed').textContent = seed;
         }
         
+        // ==================== RESIZE CANVAS FOR MOBILE ====================
+        function resizeCanvas() {
+            const container = document.querySelector('.world-canvas-container');
+            const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+            
+            let maxSize = Math.min(
+                Math.floor(window.innerWidth * 0.94),
+                Math.floor(window.innerHeight * 0.62),
+                720
+            );
+            
+            if (isMobile) {
+                VIEW_TILES = 11;
+                maxSize = Math.min(maxSize, 520);
+            } else {
+                VIEW_TILES = 15;
+            }
+            
+            TILE_SIZE = Math.floor(maxSize / VIEW_TILES);
+            CANVAS_SIZE = TILE_SIZE * VIEW_TILES;
+            
+            const canvas = document.getElementById('world-canvas');
+            canvas.width = CANVAS_SIZE;
+            canvas.height = CANVAS_SIZE;
+            canvas.style.width = CANVAS_SIZE + 'px';
+            canvas.style.height = CANVAS_SIZE + 'px';
+        }
+        
         // ==================== RENDER WORLD ====================
         function renderWorld() {
             const canvas = document.getElementById('world-canvas');
@@ -724,6 +855,8 @@
             const startY = Math.floor(player.y - VIEW_TILES / 2);
             const px = (player.x - startX) * TILE_SIZE;
             const py = (player.y - startY) * TILE_SIZE;
+            
+            const time = Date.now() / 800;
             
             for (let y = 0; y < VIEW_TILES; y++) {
                 for (let x = 0; x < VIEW_TILES; x++) {
@@ -742,17 +875,22 @@
                     ctx.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                     
                     // Pixel borders
-                    ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+                    ctx.strokeStyle = 'rgba(0,0,0,0.4)';
                     ctx.lineWidth = 1;
                     ctx.strokeRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                     
-                    // Tree details
+                    // Grass tufts
+                    if (tileType === 0) {
+                        ctx.fillStyle = '#4a7c3a';
+                        ctx.fillRect(x * TILE_SIZE + 8, y * TILE_SIZE + 22, 4, 3);
+                        ctx.fillRect(x * TILE_SIZE + 20, y * TILE_SIZE + 14, 3, 4);
+                    }
+                    
+                    // Tree details (improved)
                     if (tileType === 5) {
-                        // Trunk
                         ctx.fillStyle = '#5c4033';
                         ctx.fillRect(x * TILE_SIZE + 13, y * TILE_SIZE + 18, 6, 14);
                         
-                        // Foliage layers
                         ctx.fillStyle = '#2e8b57';
                         ctx.beginPath();
                         ctx.arc(x * TILE_SIZE + 16, y * TILE_SIZE + 14, 11, 0, Math.PI * 2);
@@ -760,21 +898,48 @@
                         
                         ctx.fillStyle = '#228b22';
                         ctx.beginPath();
-                        ctx.arc(x * TILE_SIZE + 16, y * TILE_SIZE + 10, 9, 0, Math.PI * 2);
+                        ctx.arc(x * TILE_SIZE + 16, y * TILE_SIZE + 9, 9, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // Extra leaves
+                        ctx.fillStyle = '#1e7a1e';
+                        ctx.beginPath();
+                        ctx.arc(x * TILE_SIZE + 10, y * TILE_SIZE + 16, 6, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(x * TILE_SIZE + 22, y * TILE_SIZE + 12, 5, 0, Math.PI * 2);
                         ctx.fill();
                     }
                     
-                    // Water shimmer
+                    // Wood floor texture (placed planks)
+                    if (tileType === 6) {
+                        ctx.strokeStyle = '#8b7355';
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        ctx.moveTo(x * TILE_SIZE + 4, y * TILE_SIZE + 8);
+                        ctx.lineTo(x * TILE_SIZE + TILE_SIZE - 4, y * TILE_SIZE + 8);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(x * TILE_SIZE + 4, y * TILE_SIZE + 20);
+                        ctx.lineTo(x * TILE_SIZE + TILE_SIZE - 4, y * TILE_SIZE + 20);
+                        ctx.stroke();
+                    }
+                    
+                    // Water shimmer animation
                     if (tileType === 3) {
-                        ctx.fillStyle = 'rgba(255,255,255,0.15)';
-                        ctx.fillRect(x * TILE_SIZE + 4, y * TILE_SIZE + 8, 10, 3);
-                        ctx.fillRect(x * TILE_SIZE + 18, y * TILE_SIZE + 20, 8, 2);
+                        ctx.fillStyle = 'rgba(255,255,255,0.18)';
+                        const wobble = Math.sin(time + x) * 2;
+                        ctx.fillRect(x * TILE_SIZE + 5 + wobble, y * TILE_SIZE + 10, 9, 2);
+                        ctx.fillRect(x * TILE_SIZE + 16 - wobble, y * TILE_SIZE + 22, 7, 2);
                     }
                 }
             }
             
-            // Draw player (Steve top-down style)
-            drawSteve(ctx, px - 16, py - 16, 32);
+            // Draw particles
+            drawParticles(ctx);
+            
+            // Draw player (Steve top-down with animation)
+            drawSteve(ctx, px - TILE_SIZE/2, py - TILE_SIZE/2, TILE_SIZE);
             
             // Update position text
             document.getElementById('player-pos').textContent = 
@@ -783,26 +948,28 @@
         
         function drawSteve(ctx, x, y, size) {
             const s = size / 16;
+            const t = Date.now() / 140;
+            const walk = isMoving ? Math.sin(t) * 1.8 : 0;
             
             // Shadow
-            ctx.fillStyle = 'rgba(0,0,0,0.4)';
+            ctx.fillStyle = 'rgba(0,0,0,0.45)';
             ctx.beginPath();
             ctx.ellipse(x + 8*s, y + 15*s, 7*s, 3*s, 0, 0, Math.PI * 2);
             ctx.fill();
             
-            // Legs (brown pants)
+            // Legs (brown pants) - animated
             ctx.fillStyle = '#3f2a1f';
-            ctx.fillRect(x + 4*s, y + 11*s, 4*s, 5*s);
-            ctx.fillRect(x + 9*s, y + 11*s, 4*s, 5*s);
+            ctx.fillRect(x + 4*s, y + 11*s + walk*0.6, 4*s, 5*s);
+            ctx.fillRect(x + 9*s, y + 11*s - walk*0.6, 4*s, 5*s);
             
             // Body (classic Steve blue shirt)
             ctx.fillStyle = '#4a7c4a';
             ctx.fillRect(x + 4*s, y + 6*s, 9*s, 6*s);
             
-            // Arms
+            // Arms - animated swing
             ctx.fillStyle = '#f5c28b';
-            ctx.fillRect(x + 2*s, y + 6*s, 3*s, 5*s);
-            ctx.fillRect(x + 12*s, y + 6*s, 3*s, 5*s);
+            ctx.fillRect(x + 2*s, y + 6*s + walk*0.4, 3*s, 5*s);
+            ctx.fillRect(x + 12*s, y + 6*s - walk*0.4, 3*s, 5*s);
             
             // Head
             ctx.fillStyle = '#f5c28b';
@@ -828,6 +995,43 @@
             ctx.fillRect(x + 5.5*s, y + 1.2*s, 2*s, 1*s);
         }
         
+        // ==================== PARTICLES ====================
+        function createParticles(x, y, color, count = 8) {
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 3.5,
+                    vy: (Math.random() - 0.5) * 3.5 - 0.8,
+                    life: 28 + Math.random() * 18,
+                    color: color,
+                    size: 2.5 + Math.random() * 2.5
+                });
+            }
+        }
+        
+        function updateParticles() {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.12; // gravity
+                p.life--;
+                if (p.life <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+        
+        function drawParticles(ctx) {
+            for (const p of particles) {
+                ctx.globalAlpha = Math.max(0.3, p.life / 35);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x - p.size/2, p.y - p.size/2, p.size, p.size);
+            }
+            ctx.globalAlpha = 1;
+        }
+        
         // ==================== MINIMAP ====================
         function renderMinimap() {
             const canvas = document.getElementById('minimap');
@@ -843,7 +1047,7 @@
                 for (let x = 0; x < WORLD_SIZE; x++) {
                     const tile = world[y][x];
                     ctx.fillStyle = TILE_COLORS[tile] || '#222';
-                    ctx.fillRect(x * scale, y * scale, scale + 0.5, scale + 0.5);
+                    ctx.fillRect(x * scale, y * scale, scale + 0.6, scale + 0.6);
                 }
             }
             
@@ -851,21 +1055,19 @@
             const px = player.x * scale;
             const py = player.y * scale;
             
-            // White border circle
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.arc(px, py, 5, 0, Math.PI * 2);
             ctx.stroke();
             
-            // Green player dot
             ctx.fillStyle = '#5d8c3e';
             ctx.beginPath();
             ctx.arc(px, py, 3, 0, Math.PI * 2);
             ctx.fill();
             
-            // Viewport rectangle (approximate)
-            ctx.strokeStyle = 'rgba(255, 215, 0, 0.6)';
+            // Viewport
+            ctx.strokeStyle = 'rgba(255, 215, 0, 0.65)';
             ctx.lineWidth = 1.5;
             const viewSize = VIEW_TILES * scale;
             ctx.strokeRect(
@@ -903,7 +1105,6 @@
         
         function updateInventoryUI() {
             renderHotbar();
-            // Also update crafting inventory if modal open
             if (document.getElementById('crafting-modal').style.display === 'flex') {
                 renderCraftingInventory();
             }
@@ -914,19 +1115,16 @@
             let dx = 0;
             let dy = 0;
             
-            // Keyboard
             if (keys['w'] || keys['W'] || keys['ArrowUp']) dy -= 1;
             if (keys['s'] || keys['S'] || keys['ArrowDown']) dy += 1;
             if (keys['a'] || keys['A'] || keys['ArrowLeft']) dx -= 1;
             if (keys['d'] || keys['D'] || keys['ArrowRight']) dx += 1;
             
-            // Joystick
             if (joystickActive || (joyDX !== 0 || joyDY !== 0)) {
                 dx += joyDX;
                 dy += joyDY;
             }
             
-            // Normalize diagonal movement
             if (dx !== 0 && dy !== 0) {
                 const len = Math.sqrt(dx*dx + dy*dy);
                 dx /= len;
@@ -937,7 +1135,6 @@
                 player.x += dx * player.speed;
                 player.y += dy * player.speed;
                 
-                // Clamp to world
                 player.x = Math.max(1, Math.min(WORLD_SIZE - 2, player.x));
                 player.y = Math.max(1, Math.min(WORLD_SIZE - 2, player.y));
                 
@@ -947,7 +1144,7 @@
             }
         }
         
-        // ==================== MINING / INTERACTION ====================
+        // ==================== MINING / PLACING ====================
         function setupCanvasInteraction() {
             const canvas = document.getElementById('world-canvas');
             
@@ -959,42 +1156,100 @@
                 const tileX = Math.floor(clickX / TILE_SIZE) + Math.floor(player.x - VIEW_TILES / 2);
                 const tileY = Math.floor(clickY / TILE_SIZE) + Math.floor(player.y - VIEW_TILES / 2);
                 
-                // Check if adjacent to player (including diagonal)
                 const distX = Math.abs(tileX - player.x);
                 const distY = Math.abs(tileY - player.y);
                 
-                if (distX <= 1.5 && distY <= 1.5 && 
+                if (distX <= 1.6 && distY <= 1.6 && 
                     tileX >= 0 && tileY >= 0 && tileX < WORLD_SIZE && tileY < WORLD_SIZE) {
                     
                     const tileType = world[tileY][tileX];
+                    const selectedItem = HOTBAR_ITEMS[selectedHotbarSlot];
+                    const itemCount = inventory[selectedItem] || 0;
                     
-                    if (tileType === 5) { // Tree
-                        world[tileY][tileX] = 0; // become grass
-                        inventory.log = (inventory.log || 0) + 2;
-                        addXP(25);
-                        showFloatingText(canvas, clickX, clickY, '+2 LOG', '#5d8c3e');
-                    } 
-                    else if (tileType === 2) { // Stone
-                        world[tileY][tileX] = 1; // dirt
-                        inventory.stone = (inventory.stone || 0) + 1;
-                        addXP(15);
-                        showFloatingText(canvas, clickX, clickY, '+1 STONE', '#7f7f7f');
-                    } 
-                    else if (tileType === 0 || tileType === 1 || tileType === 4) { // Grass / Dirt / Sand
-                        const item = tileType === 0 ? 'dirt' : (tileType === 1 ? 'dirt' : 'dirt');
-                        inventory.dirt = (inventory.dirt || 0) + 1;
-                        world[tileY][tileX] = 3; // turn to water for fun (or keep as dirt)
-                        addXP(8);
-                        showFloatingText(canvas, clickX, clickY, '+1 DIRT', '#8b5a2b');
+                    // === BLOCK PLACING ===
+                    const placeableItems = ['dirt', 'stone', 'plank', 'log'];
+                    if (itemCount > 0 && placeableItems.includes(selectedItem) && tileType !== 5) {
+                        // Place block
+                        let newTile = 0;
+                        if (selectedItem === 'dirt') newTile = 1;
+                        else if (selectedItem === 'stone') newTile = 2;
+                        else if (selectedItem === 'plank' || selectedItem === 'log') newTile = 6; // wood floor
+                        
+                        world[tileY][tileX] = newTile;
+                        inventory[selectedItem]--;
+                        if (inventory[selectedItem] <= 0) delete inventory[selectedItem];
+                        
+                        addXP(6);
+                        createParticles(clickX, clickY, '#c4a77d', 6);
+                        playSound('place');
+                        showFloatingText(canvas, clickX, clickY, `PLACED ${selectedItem.toUpperCase()}`, '#5d8c3e');
+                        
+                        updateInventoryUI();
+                        renderWorld();
+                        renderMinimap();
+                        return;
                     }
                     
-                    updateInventoryUI();
-                    renderWorld();
-                    renderMinimap();
+                    // === MINING ===
+                    let mined = false;
+                    let dropItem = null;
+                    let xpGain = 8;
+                    let particleColor = '#888';
+                    let floatText = '';
+                    
+                    if (tileType === 5) { // Tree
+                        world[tileY][tileX] = 0;
+                        inventory.log = (inventory.log || 0) + 2;
+                        if (Math.random() < 0.28) {
+                            inventory.apple = (inventory.apple || 0) + 1;
+                        }
+                        dropItem = 'log';
+                        xpGain = 22;
+                        particleColor = '#228b22';
+                        floatText = '+2 LOG';
+                        mined = true;
+                    } 
+                    else if (tileType === 2) { // Stone
+                        world[tileY][tileX] = 1;
+                        inventory.stone = (inventory.stone || 0) + 1;
+                        dropItem = 'stone';
+                        xpGain = 14;
+                        particleColor = '#7f7f7f';
+                        floatText = '+1 STONE';
+                        mined = true;
+                    } 
+                    else if (tileType === 6) { // Wood floor
+                        world[tileY][tileX] = 0;
+                        inventory.plank = (inventory.plank || 0) + 1;
+                        dropItem = 'plank';
+                        xpGain = 10;
+                        particleColor = '#c4a77d';
+                        floatText = '+1 PLANK';
+                        mined = true;
+                    }
+                    else if (tileType === 0 || tileType === 1 || tileType === 4) { // Grass/Dirt/Sand
+                        inventory.dirt = (inventory.dirt || 0) + 1;
+                        world[tileY][tileX] = 3; // fun: turn to water
+                        dropItem = 'dirt';
+                        xpGain = 7;
+                        particleColor = '#8b5a2b';
+                        floatText = '+1 DIRT';
+                        mined = true;
+                    }
+                    
+                    if (mined) {
+                        addXP(xpGain);
+                        createParticles(clickX, clickY, particleColor, 9);
+                        playSound('dig');
+                        showFloatingText(canvas, clickX, clickY, floatText, particleColor);
+                        updateInventoryUI();
+                        renderWorld();
+                        renderMinimap();
+                    }
                 }
             });
             
-            // Keyboard hotbar select
+            // Keyboard hotbar + shortcuts
             document.addEventListener('keydown', (e) => {
                 if (e.key >= '1' && e.key <= '6') {
                     selectedHotbarSlot = parseInt(e.key) - 1;
@@ -1008,21 +1263,26 @@
                 if (e.key.toLowerCase() === 'g') {
                     generateNewWorld();
                 }
+                
+                if (e.key.toLowerCase() === 's' && e.ctrlKey) {
+                    e.preventDefault();
+                    saveGame();
+                }
             });
         }
         
         function showFloatingText(canvas, x, y, text, color) {
             const ctx = canvas.getContext('2d');
-            ctx.font = 'bold 14px monospace';
+            ctx.font = 'bold 13px monospace';
             ctx.fillStyle = color;
             ctx.strokeStyle = '#000';
             ctx.lineWidth = 3;
-            ctx.strokeText(text, x, y - 10);
-            ctx.fillText(text, x, y - 10);
+            ctx.strokeText(text, x, y - 12);
+            ctx.fillText(text, x, y - 12);
             
             setTimeout(() => {
                 renderWorld();
-            }, 600);
+            }, 550);
         }
         
         // ==================== CRAFTING SYSTEM ====================
@@ -1038,7 +1298,7 @@
                 div.className = 'inv-item';
                 div.innerHTML = `
                     <div class="item-name">
-                        <span style="font-size:18px;">${ITEM_ICONS[item] || '⬜'}</span>
+                        <span style="font-size:17px;">${ITEM_ICONS[item] || '⬜'}</span>
                         <span>${item.toUpperCase()}</span>
                     </div>
                     <span style="color:#ffd700; font-weight:bold;">x${count}</span>
@@ -1046,7 +1306,6 @@
                 
                 div.onclick = () => {
                     selectedCraftItem = item;
-                    // Highlight
                     document.querySelectorAll('.inv-item').forEach(el => el.style.borderColor = '#1f1f1f');
                     div.style.borderColor = '#5d8c3e';
                 };
@@ -1068,7 +1327,6 @@
                     const idx = parseInt(slot.dataset.index);
                     
                     if (selectedCraftItem && !craftingGrid[idx]) {
-                        // Place item
                         craftingGrid[idx] = selectedCraftItem;
                         inventory[selectedCraftItem]--;
                         if (inventory[selectedCraftItem] <= 0) delete inventory[selectedCraftItem];
@@ -1076,7 +1334,6 @@
                         selectedCraftItem = null;
                         updateCraftingUI();
                     } else if (craftingGrid[idx]) {
-                        // Remove item back to inventory
                         const item = craftingGrid[idx];
                         inventory[item] = (inventory[item] || 0) + 1;
                         craftingGrid[idx] = null;
@@ -1097,7 +1354,7 @@
                 const item = craftingGrid[i];
                 
                 if (item) {
-                    slot.innerHTML = `<span style="font-size:26px;">${ITEM_ICONS[item] || '⬜'}</span>`;
+                    slot.innerHTML = `<span style="font-size:24px;">${ITEM_ICONS[item] || '⬜'}</span>`;
                     slot.style.borderColor = '#5d8c3e';
                 } else {
                     slot.innerHTML = '';
@@ -1105,10 +1362,7 @@
                 }
             }
             
-            // Check for recipe
             checkRecipe();
-            
-            // Refresh inventory list
             renderCraftingInventory();
         }
         
@@ -1124,7 +1378,6 @@
             
             let result = null;
             
-            // Recipe matching (simplified but works great)
             if (counts['log'] === 1) {
                 result = { item: 'plank', count: 4 };
             } 
@@ -1135,12 +1388,11 @@
                 result = { item: 'wooden_pickaxe', count: 1 };
             }
             else if (counts['stone'] >= 3 && counts['stick'] >= 2) {
-                // Bonus recipe
-                result = { item: 'wooden_pickaxe', count: 1 };
+                result = { item: 'stone_pickaxe', count: 1 };
             }
             
             if (result) {
-                output.innerHTML = `<span style="font-size:32px;">${ITEM_ICONS[result.item] || '⬜'}</span>`;
+                output.innerHTML = `<span style="font-size:30px;">${ITEM_ICONS[result.item] || '⬜'}</span>`;
                 output.onclick = () => takeOutput(result);
             }
         }
@@ -1148,25 +1400,23 @@
         function takeOutput(result) {
             if (!result) return;
             
-            // Add to inventory
             inventory[result.item] = (inventory[result.item] || 0) + result.count;
             
-            // Consume grid items (already removed when placed)
             craftingGrid = Array(9).fill(null);
             
-            // XP reward
-            const xpGain = result.item === 'wooden_pickaxe' ? 80 : 35;
+            const xpGain = (result.item.includes('pickaxe')) ? 75 : 32;
             addXP(xpGain);
             
             updateCraftingUI();
             updateInventoryUI();
             
-            // Nice effect
+            playSound('craft');
+            
             const output = document.getElementById('output-slot');
-            output.style.transform = 'scale(1.3)';
+            output.style.transform = 'scale(1.35)';
             setTimeout(() => {
                 output.style.transform = 'scale(1)';
-            }, 180);
+            }, 160);
         }
         
         function clearCraftingGrid() {
@@ -1181,12 +1431,11 @@
         }
         
         function autoCraftDemo() {
-            // Demo: give some resources and auto craft a pickaxe
-            inventory.log = (inventory.log || 0) + 5;
-            inventory.plank = (inventory.plank || 0) + 8;
-            inventory.stick = (inventory.stick || 0) + 4;
+            inventory.log = (inventory.log || 0) + 4;
+            inventory.plank = (inventory.plank || 0) + 6;
+            inventory.stick = (inventory.stick || 0) + 3;
+            inventory.stone = (inventory.stone || 0) + 3;
             
-            // Put in grid automatically for demo
             craftingGrid = [null, 'plank', null, 'plank', 'stick', 'plank', null, 'stick', null];
             
             updateCraftingUI();
@@ -1197,7 +1446,6 @@
             const modal = document.getElementById('crafting-modal');
             modal.style.display = 'flex';
             
-            // Reset selected
             selectedCraftItem = null;
             renderCraftingInventory();
             updateCraftingUI();
@@ -1206,8 +1454,6 @@
         function closeCrafting() {
             const modal = document.getElementById('crafting-modal');
             modal.style.display = 'none';
-            
-            // Return any items left in grid to inventory
             clearCraftingGrid();
         }
         
@@ -1218,16 +1464,36 @@
             while (xp >= xpToNext) {
                 xp -= xpToNext;
                 level++;
-                xpToNext = Math.floor(100 * (level * 0.9 + 1));
+                xpToNext = Math.floor(105 * (level * 0.88 + 1.1));
                 
-                // Level up effect
+                // Level up particles & effect
                 const levelEl = document.getElementById('level-text');
-                levelEl.style.transform = 'scale(1.6)';
+                levelEl.style.transform = 'scale(1.7)';
                 levelEl.style.color = '#ffd700';
+                
+                // Golden particles around level
+                setTimeout(() => {
+                    const canvas = document.getElementById('world-canvas');
+                    const ctx = canvas.getContext('2d');
+                    for (let i = 0; i < 14; i++) {
+                        particles.push({
+                            x: 60 + Math.random() * 80,
+                            y: 25 + Math.random() * 30,
+                            vx: (Math.random()-0.5)*2.5,
+                            vy: (Math.random()-0.5)*2 - 1,
+                            life: 35,
+                            color: '#ffd700',
+                            size: 3 + Math.random()*2
+                        });
+                    }
+                }, 80);
+                
                 setTimeout(() => {
                     levelEl.style.transform = 'scale(1)';
                     levelEl.style.color = '#fff';
-                }, 400);
+                }, 380);
+                
+                playSound('levelup');
             }
             
             updateLevelUI();
@@ -1240,20 +1506,165 @@
             document.getElementById('xp-text').textContent = `${xp} / ${xpToNext}`;
         }
         
+        // ==================== SOUND ====================
+        function initAudio() {
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            } catch(e) {
+                console.log('Audio not supported');
+            }
+        }
+        
+        function playSound(type) {
+            if (!soundEnabled || !audioCtx) return;
+            
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const filter = audioCtx.createBiquadFilter();
+                
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                if (type === 'dig') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.value = 95;
+                    gain.gain.value = 0.28;
+                    filter.type = 'lowpass';
+                    filter.frequency.value = 750;
+                    gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.28);
+                    osc.start();
+                    setTimeout(() => osc.stop(), 320);
+                } 
+                else if (type === 'place') {
+                    osc.type = 'square';
+                    osc.frequency.value = 520;
+                    gain.gain.value = 0.22;
+                    gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+                    osc.start();
+                    setTimeout(() => osc.stop(), 140);
+                } 
+                else if (type === 'craft') {
+                    osc.type = 'sine';
+                    osc.frequency.value = 780;
+                    gain.gain.value = 0.35;
+                    gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.45);
+                    osc.start();
+                    setTimeout(() => osc.stop(), 520);
+                } 
+                else if (type === 'levelup') {
+                    osc.type = 'sine';
+                    osc.frequency.value = 523;
+                    gain.gain.value = 0.45;
+                    osc.start();
+                    setTimeout(() => { osc.frequency.value = 659; }, 140);
+                    setTimeout(() => { osc.frequency.value = 784; }, 290);
+                    setTimeout(() => { 
+                        gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.55); 
+                        osc.stop(); 
+                    }, 420);
+                }
+            } catch(e) {}
+        }
+        
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('sound-btn');
+            btn.textContent = soundEnabled ? '🔊' : '🔇';
+            if (soundEnabled && audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+        
+        // ==================== SAVE / LOAD ====================
+        function saveGame(silent = false) {
+            const saveData = {
+                world: world,
+                player: player,
+                level: level,
+                xp: xp,
+                xpToNext: xpToNext,
+                inventory: inventory,
+                worldSeed: worldSeed,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('mc_web_save_v2', JSON.stringify(saveData));
+            
+            if (!silent) {
+                const canvas = document.getElementById('world-canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.font = 'bold 15px monospace';
+                ctx.fillStyle = '#ffd700';
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 3;
+                ctx.strokeText('💾 GAME SAVED!', 18, 28);
+                ctx.fillText('💾 GAME SAVED!', 18, 28);
+                setTimeout(() => renderWorld(), 1400);
+            }
+        }
+        
+        function loadGame() {
+            const dataStr = localStorage.getItem('mc_web_save_v2');
+            if (!dataStr) {
+                const canvas = document.getElementById('world-canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.font = 'bold 14px monospace';
+                ctx.fillStyle = '#ffaa00';
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 3;
+                ctx.strokeText('NO SAVE FOUND', 22, 32);
+                ctx.fillText('NO SAVE FOUND', 22, 32);
+                setTimeout(() => renderWorld(), 1200);
+                return;
+            }
+            
+            try {
+                const save = JSON.parse(dataStr);
+                
+                if (save.world) world = save.world;
+                if (save.player) player = save.player;
+                if (save.level) level = save.level;
+                if (save.xp) xp = save.xp;
+                if (save.xpToNext) xpToNext = save.xpToNext;
+                if (save.inventory) inventory = save.inventory;
+                if (save.worldSeed) {
+                    worldSeed = save.worldSeed;
+                    document.getElementById('world-seed').textContent = worldSeed;
+                }
+                
+                updateLevelUI();
+                updateInventoryUI();
+                renderWorld();
+                renderMinimap();
+                
+                const canvas = document.getElementById('world-canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.font = 'bold 14px monospace';
+                ctx.fillStyle = '#5d8c3e';
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 3;
+                ctx.strokeText('📂 GAME LOADED!', 18, 28);
+                ctx.fillText('📂 GAME LOADED!', 18, 28);
+                setTimeout(() => renderWorld(), 1300);
+            } catch(e) {
+                console.error('Load failed', e);
+            }
+        }
+        
         // ==================== VIRTUAL JOYSTICK ====================
         function setupJoystick() {
             const container = document.getElementById('joystick-container');
             const outer = document.getElementById('joystick-outer');
             const knob = document.getElementById('joystick-knob');
             
-            // Show on touch devices
             if ('ontouchstart' in window) {
                 container.style.display = 'block';
             }
             
-            let centerX = 60;
-            let centerY = 60;
-            let maxDist = 38;
+            let centerX = 55;
+            let centerY = 55;
+            let maxDist = 32;
             
             function updateKnob(x, y) {
                 const dx = x - centerX;
@@ -1267,7 +1678,6 @@
                 knob.style.left = knobX + 'px';
                 knob.style.top = knobY + 'px';
                 
-                // Normalize to -1..1
                 joyDX = (knobX - centerX) / maxDist;
                 joyDY = (knobY - centerY) / maxDist;
             }
@@ -1280,7 +1690,6 @@
                 joystickActive = false;
             }
             
-            // Mouse support (desktop testing)
             outer.addEventListener('mousedown', (e) => {
                 joystickActive = true;
                 const rect = outer.getBoundingClientRect();
@@ -1297,7 +1706,6 @@
                 if (joystickActive) resetKnob();
             });
             
-            // Touch support
             outer.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 joystickActive = true;
@@ -1319,19 +1727,36 @@
                 resetKnob();
             });
             
-            // Also allow dragging knob directly
             knob.addEventListener('touchstart', (e) => e.preventDefault());
+        }
+        
+        // ==================== MINIMAP TELEPORT ====================
+        function setupMinimapClick() {
+            const mini = document.getElementById('minimap');
+            mini.addEventListener('click', (e) => {
+                const rect = mini.getBoundingClientRect();
+                const mx = ((e.clientX - rect.left) / rect.width) * WORLD_SIZE;
+                const my = ((e.clientY - rect.top) / rect.height) * WORLD_SIZE;
+                
+                player.x = Math.max(2, Math.min(WORLD_SIZE - 2, mx));
+                player.y = Math.max(2, Math.min(WORLD_SIZE - 2, my));
+                
+                addXP(8);
+                createParticles(40, 40, '#5d8c3e', 5); // small effect on minimap area
+                
+                renderWorld();
+                renderMinimap();
+            });
         }
         
         // ==================== GAME LOOP ====================
         function gameLoop() {
             updatePlayer();
+            updateParticles();
             
-            // Render only when moving or every few frames for performance
-            if (isMoving || Math.random() < 0.15) {
-                renderWorld();
-                renderMinimap();
-            }
+            // Render more often for particles and smooth feel
+            renderWorld();
+            renderMinimap();
             
             requestAnimationFrame(gameLoop);
         }
@@ -1341,7 +1766,6 @@
             document.addEventListener('keydown', (e) => {
                 keys[e.key] = true;
                 
-                // Prevent scrolling with arrows
                 if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
                     e.preventDefault();
                 }
@@ -1351,7 +1775,6 @@
                 keys[e.key] = false;
             });
             
-            // Focus canvas for better keyboard
             document.getElementById('world-canvas').setAttribute('tabindex', '0');
         }
         
@@ -1361,45 +1784,42 @@
             const ctx = canvas.getContext('2d');
             ctx.imageSmoothingEnabled = false;
             
-            // Background
             ctx.fillStyle = '#2a2a2a';
-            ctx.fillRect(0, 0, 64, 64);
+            ctx.fillRect(0, 0, 56, 56);
             
-            // Draw mini Steve head (front view)
-            const s = 4;
+            const s = 3.5;
             
             // Head
             ctx.fillStyle = '#f5c28b';
-            ctx.fillRect(16, 12, 32, 28);
+            ctx.fillRect(14, 10, 28, 24);
             
             // Hair
             ctx.fillStyle = '#3f2a1f';
-            ctx.fillRect(16, 8, 32, 10);
-            ctx.fillRect(12, 12, 8, 24);
-            ctx.fillRect(44, 12, 8, 24);
+            ctx.fillRect(14, 7, 28, 9);
+            ctx.fillRect(11, 10, 7, 20);
+            ctx.fillRect(38, 10, 7, 20);
             
             // Eyes
             ctx.fillStyle = '#000';
-            ctx.fillRect(24, 22, 6, 6);
-            ctx.fillRect(38, 22, 6, 6);
+            ctx.fillRect(20, 18, 5, 5);
+            ctx.fillRect(32, 18, 5, 5);
             
-            // Eye shine
             ctx.fillStyle = '#fff';
-            ctx.fillRect(25, 23, 2, 2);
-            ctx.fillRect(39, 23, 2, 2);
+            ctx.fillRect(21, 19, 2, 2);
+            ctx.fillRect(33, 19, 2, 2);
             
             // Mouth
             ctx.fillStyle = '#c17d5a';
-            ctx.fillRect(28, 32, 8, 3);
+            ctx.fillRect(24, 27, 7, 2.5);
             
-            // Body hint
+            // Body
             ctx.fillStyle = '#4a7c4a';
-            ctx.fillRect(20, 40, 24, 18);
+            ctx.fillRect(17, 34, 22, 16);
             
             // Border
             ctx.strokeStyle = '#1f1f1f';
             ctx.lineWidth = 4;
-            ctx.strokeRect(2, 2, 60, 60);
+            ctx.strokeRect(2, 2, 52, 52);
         }
         
         function generateNewWorld() {
@@ -1407,12 +1827,11 @@
             generateWorld(newSeed);
             player.x = 32;
             player.y = 32;
+            particles = [];
             
             renderWorld();
             renderMinimap();
-            
-            // Small XP for exploring new world
-            addXP(20);
+            addXP(18);
         }
         
         function resetPlayer() {
@@ -1423,8 +1842,42 @@
         }
         
         function init() {
-            // Generate initial world
-            generateWorld(48291);
+            // Resize canvas for current device
+            resizeCanvas();
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                renderWorld();
+                renderMinimap();
+            });
+            
+            // Audio
+            initAudio();
+            
+            // Generate or load world
+            const saved = localStorage.getItem('mc_web_save_v2');
+            if (saved) {
+                try {
+                    const save = JSON.parse(saved);
+                    if (save.world) {
+                        world = save.world;
+                        if (save.player) player = save.player;
+                        if (save.level) level = save.level;
+                        if (save.xp) xp = save.xp;
+                        if (save.xpToNext) xpToNext = save.xpToNext;
+                        if (save.inventory) inventory = save.inventory;
+                        if (save.worldSeed) worldSeed = save.worldSeed;
+                        
+                        document.getElementById('world-seed').textContent = worldSeed;
+                        console.log('%c[MC v2] Loaded previous save', 'color:#5d8c3e');
+                    } else {
+                        generateWorld(48291);
+                    }
+                } catch(e) {
+                    generateWorld(48291);
+                }
+            } else {
+                generateWorld(48291);
+            }
             
             // Initial renders
             renderWorld();
@@ -1438,33 +1891,47 @@
             setupCanvasInteraction();
             setupKeyboard();
             setupJoystick();
+            setupMinimapClick();
+            
+            // Auto-save every 45 seconds
+            setInterval(() => {
+                saveGame(true);
+            }, 45000);
             
             // Start game loop
             gameLoop();
             
-            // Welcome message in console (for devs)
-            console.log('%c[Minecraft Web] خفن! همه چیز آماده‌ست. لذت ببر!', 'color:#5d8c3e');
-            
-            // Initial tip
+            // Welcome tip
             setTimeout(() => {
                 const canvas = document.getElementById('world-canvas');
                 const ctx = canvas.getContext('2d');
-                ctx.font = 'bold 13px monospace';
+                ctx.font = 'bold 12px monospace';
                 ctx.fillStyle = '#ffd700';
                 ctx.strokeStyle = '#000';
                 ctx.lineWidth = 3;
-                ctx.strokeText('Click near player to mine!', 180, 40);
-                ctx.fillText('Click near player to mine!', 180, 40);
+                ctx.strokeText('Tap near you to mine or place blocks!', 12, 38);
+                ctx.fillText('Tap near you to mine or place blocks!', 12, 38);
                 
                 setTimeout(() => {
                     renderWorld();
-                }, 2200);
-            }, 1800);
+                }, 2400);
+            }, 1600);
             
-            // Make sure mobile shows joystick
+            // Make sure mobile joystick visible
             if ('ontouchstart' in window) {
                 document.getElementById('joystick-container').style.display = 'block';
             }
+            
+            // Easter egg: press ? for fun
+            document.addEventListener('keypress', (e) => {
+                if (e.key === '?') {
+                    addXP(50);
+                    createParticles(200, 200, '#ffd700', 12);
+                    playSound('levelup');
+                }
+            });
+            
+            console.log('%c[Minecraft Web v2.0] Mobile enhanced + cooler features ready! خفن شد 🔥', 'color:#5d8c3e');
         }
         
         // Boot the game
